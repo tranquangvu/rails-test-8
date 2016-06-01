@@ -1,25 +1,42 @@
 #products-index-container
   h1 This is home page
-  .filter
+  .products-filter
+    = form_tag products_path, method: :get do
+      .input-field
+        = collection_check_boxes nil, :manufacturer_id, Manufacturer.all, :id, :name, include_hidden: false, checked: @manufacturer_id
+      .range-field
+        = range_field_tag :price, @price, min: 1, max: 50
+      = submit_tag 'Filter'
+  .product-sort
+    = form_tag products_path, method: :get, id: 'sort-form' do
+      - if @manufacturer_id.present?
+        - @manufacturer_id.each do |mi|
+          = hidden_field_tag 'manufacturer_id[]', mi
+      - if @price.present?
+        = hidden_field_tag :price, @price
+      .input-field
+        = select_tag :sort_field_id, options_for_select(Product.sort_fields.each_with_index.map{ |sort_field, index| [sort_field.to_s.capitalize, index] }, @sort_field_id), { onchange: "$('#sort-form').submit();" }
   .products-listing
-    - @products.each_slice(3) do |products|
-      .row
-        - products.each do |p|
-          .col.s12.m4.l4
-            .card
-              .card-image
-                = link_to product_path(p) do
-                  = image_tag p.image.url
-              .card-content
-                .name.card-title
+    - if @products.present?
+      - @products.each_slice(3) do |products|
+        .row
+          - products.each do |p|
+            .col.s12.m4.l4
+              .card
+                .card-image
                   = link_to product_path(p) do
-                    = p.name
-                .type
-                  = p.type.name
-                .brand
-                  = p.manufacturer.name
-                .price
-                  = number_to_currency(p.price)
-              .card-action
-                = link_to 'Add to card', '#', class: 'waves-effect waves-light btn'
-                
+                    = image_tag p.image.url
+                .card-content
+                  .name.card-title
+                    = link_to product_path(p) do
+                      = p.name
+                  .type
+                    = p.type.name
+                  .brand
+                    = p.manufacturer.name
+                  .price
+                    = number_to_currency(p.price)
+                .card-action
+                  = link_to 'Add to card', '#', class: 'waves-effect waves-light btn'
+    - else
+      p There is no product results

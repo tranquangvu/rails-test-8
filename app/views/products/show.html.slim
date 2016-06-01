@@ -1,0 +1,21 @@
+#product-show-container
+	h3.header.product-name
+		= @product.name
+	.product-image
+		= image_tag @product.image.url(:medium)
+	.product-description
+		| Description: 
+		= @product.description
+	.product-price
+		| Price: 
+		= number_to_currency(@product.price)
+	.product-brand
+		| Brand: 
+		= @product.manufacturer.name
+	.product-type
+		| Type: 
+		= @product.type.name
+	.action
+		= link_to 'Edit', edit_product_path(@product), class: 'waves-effect waves-light btn cyan'
+		= link_to 'Destroy', product_path(@product), method: :delete, data: { confirm: "Are you sure to delete this product?" }, class: 'waves-effect waves-light btn red'
+		

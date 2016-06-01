@@ -1,0 +1,25 @@
+#products-index-container
+  h1 This is home page
+  .filter
+  .products-listing
+    - @products.each_slice(3) do |products|
+      .row
+        - products.each do |p|
+          .col.s12.m4.l4
+            .card
+              .card-image
+                = link_to product_path(p) do
+                  = image_tag p.image.url
+              .card-content
+                .name.card-title
+                  = link_to product_path(p) do
+                    = p.name
+                .type
+                  = p.type.name
+                .brand
+                  = p.manufacturer.name
+                .price
+                  = number_to_currency(p.price)
+              .card-action
+                = link_to 'Add to card', '#', class: 'waves-effect waves-light btn'
+                

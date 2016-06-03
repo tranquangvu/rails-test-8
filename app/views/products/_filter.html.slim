@@ -1,7 +1,9 @@
 .products-filter-container
   h5 Redefine by: 
 
-  = simple_form_for product_filter, url: products_path(params), method: :get do |f|
+  = simple_form_for product_filter, url: products_path, method: :get do |f|
+  	= f.hidden_field :sort
+  	= f.hidden_field :order
   	.row
   		= f.input :manufacturer_ids, as: :check_boxes, collection: Manufacturer.all, wrapper_html: { class: 's12' }
   	.row

@@ -19,7 +19,7 @@
                 .col.s6
                   h5 Sort by:
                 .col.s6
-                  = select_tag :sort, options_for_select(sort_product_listing(params), root_path(params)), onchange: "window.location = this.value"
+                  = select_tag :sort, options_for_select(sort_product_listing, root_path(params)), onchange: "window.location = this.value"
         - if @products.present?
           - @products.each_slice(3) do |products|
             .row

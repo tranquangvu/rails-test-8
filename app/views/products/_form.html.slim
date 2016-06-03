@@ -1,5 +1,5 @@
 .products-form-container
-	= simple_form_for @product, defaults: { label: false }, html: { multipart: true } do |f|
+	= simple_form_for @product, defaults: { label: false } do |f|
 		.form-error
 			= f.error_notification
 		.row
@@ -9,5 +9,5 @@
 			= f.input :price, placeholder: 'Price', wrapper_html: { class: 's12' }
 			= f.association :manufacturer, include_blank: 'Choose a manufacturer', wrapper_html: { class: 's12' }
 			= f.association :type, include_blank: 'Choose a type', wrapper_html: { class: 's12' }
-			= f.button :submit, class: 'waves-effect waves-light btn-large'	
+		= f.button :submit, class: 'btn-large'	
 			

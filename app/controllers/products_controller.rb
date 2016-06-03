@@ -1,10 +1,10 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-  before_action :init_default_params, only: [:index]
 
   def index
-  	@products = Product.filter(filter_params).order(sort_field)
+    @product_filter = ProductFilter.new(filter_params)
+  	@products = @product_filter.search
   end
 
   def new
@@ -40,12 +40,6 @@ class ProductsController < ApplicationController
   end
 
   private
-    def init_default_params
-      @manufacturer_id ||= params[:manufacturer_id]
-      @price ||= params[:price]
-      @sort_field_id = params[:sort_field_id].to_i
-    end
-
   	def product_params
   		params.require(:product).permit(:name, :description, :price, :manufacturer_id, :type_id, :image)
   	end
@@ -55,10 +49,12 @@ class ProductsController < ApplicationController
     end
 
     def filter_params
-      params.slice(:price, :manufacturer_id)
-    end
-
-    def sort_field
-      Product.sort_field_by_id(params[:sort_field_id].to_i)
+      return if params[:product_filter].nil?
+      data = params.require(:product_filter).permit(
+                                      :price, 
+                                      :sort,
+                                      :order,
+                                      manufacturer_ids: []
+                                      )
     end
 end

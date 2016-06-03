@@ -1,11 +1,11 @@
 #product-show-container
-	h3.header.product-name
+	h1.header.product-name
 		= @product.name
 	.product-image
 		= image_tag @product.image.url(:medium)
 	.product-description
 		| Description: 
-		= @product.description
+		= simple_format @product.description
 	.product-price
 		| Price: 
 		= number_to_currency(@product.price)

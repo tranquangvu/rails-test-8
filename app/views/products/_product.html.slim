@@ -1,0 +1,18 @@
+.products-product-container
+  .card
+    .card-image
+      = link_to product do
+        = image_tag product.image.url(:thumb)
+    .card-content
+      .card-title
+        = link_to product, class: 'bold' do
+          = product.name
+      .type.bold
+        = product.type.name
+      .brand
+        = product.manufacturer.name
+      .price.bold
+        = number_to_currency(product.price)
+    .card-action
+      = link_to product, class: 'waves-effect waves-light btn atc-btn no-shadow' do
+        = fa_icon 'shopping-cart', text: 'Add to card'

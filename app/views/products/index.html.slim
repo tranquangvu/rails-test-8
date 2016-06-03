@@ -1,42 +1,30 @@
 #products-index-container
-  h1 This is home page
-  .products-filter
-    = form_tag products_path, method: :get do
-      .input-field
-        = collection_check_boxes nil, :manufacturer_id, Manufacturer.all, :id, :name, include_hidden: false, checked: @manufacturer_id
-      .range-field
-        = range_field_tag :price, @price, min: 1, max: 50
-      = submit_tag 'Filter'
-  .product-sort
-    = form_tag products_path, method: :get, id: 'sort-form' do
-      - if @manufacturer_id.present?
-        - @manufacturer_id.each do |mi|
-          = hidden_field_tag 'manufacturer_id[]', mi
-      - if @price.present?
-        = hidden_field_tag :price, @price
-      .input-field
-        = select_tag :sort_field_id, options_for_select(Product.sort_fields.each_with_index.map{ |sort_field, index| [sort_field.to_s.capitalize, index] }, @sort_field_id), { onchange: "$('#sort-form').submit();" }
-  .products-listing
-    - if @products.present?
-      - @products.each_slice(3) do |products|
-        .row
-          - products.each do |p|
-            .col.s12.m4.l4
-              .card
-                .card-image
-                  = link_to product_path(p) do
-                    = image_tag p.image.url
-                .card-content
-                  .name.card-title
-                    = link_to product_path(p) do
-                      = p.name
-                  .type
-                    = p.type.name
-                  .brand
-                    = p.manufacturer.name
-                  .price
-                    = number_to_currency(p.price)
-                .card-action
-                  = link_to 'Add to card', '#', class: 'waves-effect waves-light btn'
-    - else
-      p There is no product results
+  = render 'shared/services'
+  #main-content.container
+    .row
+      .col.s12.m3
+        = render 'products/filter', product_filter: @product_filter
+      .col.s12.m9
+        #products-header
+          .intro
+            h5.bold.uppercase MEN'S RUNNING SHOE GUIDE
+            p Find running shoes great for a range of running types and goals.
+        #products-counter-and-sorting
+          .row
+            .col.s6.counter
+                = @products.count
+                |  matching products
+            .col.s6.right-align.sorting
+              .row
+                .col.s6
+                  h5 Sort by:
+                .col.s6
+                  = select_tag :sort, options_for_select(sort_product_listing(params), root_path(params)), onchange: "window.location = this.value"
+        - if @products.present?
+          - @products.each_slice(3) do |products|
+            .row
+              - products.each do |product|
+                .col.s12.m4.l4
+                  = render product
+        - else
+          p.center-align There is no product results

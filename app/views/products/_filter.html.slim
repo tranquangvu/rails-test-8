@@ -1,0 +1,12 @@
+.products-filter-container
+  h5 Redefine by: 
+
+  = simple_form_for product_filter, url: products_path(params), method: :get do |f|
+  	.row
+  		= f.input :manufacturer_ids, as: :check_boxes, collection: Manufacturer.all, wrapper_html: { class: 's12' }
+  	.row
+  		= f.input :price, as: :range, min: Product.minimum('price'), max: Product.maximum('price'), wrapper_html: { class: 's12' }
+  	= f.button :submit
+  
+
+  

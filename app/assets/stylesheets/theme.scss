@@ -1,4 +1,74 @@
+// color define
+$white: #fff;
+$black: #000;
+$black-light-1: #212121;
+$grey: #f7f7f7;
+$blue: #1976d2;
+
+// common style
 body{
 	font-family: 'Roboto', sans-serif;
 	overflow-x: hidden;
+	color: $black;
+	font-size: 15px;
 }
+
+.row{
+	margin-bottom: 0;	
+}		
+
+@media only screen and (min-width: 993px){
+	.container {
+	    width: 90%;
+	}
+}
+
+.uppercase{
+	text-transform: uppercase;
+}
+
+.bold{
+	font-weight: bold;
+}
+
+.no-shadow{
+	box-shadow: none;
+}
+
+// nav header 
+nav{
+	background: $white;
+	color: $black;
+	min-height: 156px;
+	
+	.brand-logo{
+		color: $black;
+		margin: 45px 0 35px 0;
+	}
+}
+
+// footer
+footer{
+	background: $black-light-1;
+	text-align: center;
+	
+	.footer-logo{
+		margin-top: 20px;	
+	}
+
+	ul{
+		li{
+			display: inline-block;
+			margin: 20px 10px;
+			
+			a{
+				color: $white !important;
+				
+				&:hover{
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+}
+

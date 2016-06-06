@@ -39,4 +39,7 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Fixing error "Could not run the `identify` command. Please install ImageMagick."
+  Paperclip.options[:command_path] = "/usr/local/bin/"
 end

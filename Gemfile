@@ -11,8 +11,21 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+gem 'materialize-sass'
+gem 'slim', '~> 3.0', '>= 3.0.7'
+gem 'paperclip', '~> 4.3', '>= 4.3.6'
+gem 'devise'
+gem 'simple_form', '~> 3.2', '>= 3.2.1'
+gem 'materialize-form'
+gem 'font-awesome-rails'
+gem 'kaminari', '~> 0.16.3'
+gem 'factory_girl_rails'
+gem 'rails_utils'
+
 group :development, :test do
   gem 'pry-rails'
+  gem 'rspec-rails', '~> 3.4'
+  gem 'shoulda'
 end
 
 group :development do
@@ -21,11 +34,3 @@ group :development do
   gem 'binding_of_caller'
   gem 'spring'
 end
-
-gem 'materialize-sass'
-gem 'slim', '~> 3.0', '>= 3.0.7'
-gem 'paperclip', '~> 4.3', '>= 4.3.6'
-gem 'devise'
-gem 'simple_form', '~> 3.2', '>= 3.2.1'
-gem 'materialize-form'
-gem "font-awesome-rails"

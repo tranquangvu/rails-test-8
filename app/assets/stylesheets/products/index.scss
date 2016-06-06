@@ -1,6 +1,6 @@
 #products-index-container{
 	#main-content{
-		#products-header{
+		.products-header{
 			height: 235px;
 			position: relative;
 			background: asset_url('products_header.png');
@@ -28,26 +28,6 @@
 					margin: 0;
 				}
 			}
-		}
-
-		#products-counter-and-sorting{
-			margin: 10px 0;
-			font-weight: 300 !important;
-
-			.counter{
-				margin: 15px 0;
-			}
-
-			.sorting{
-				h5 {
-					font-weight: 300;
-					font-size: 18px;
-				}
-			}
-		}
-
-		#products-listing{
-			
 		}
 	}
 }

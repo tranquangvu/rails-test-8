@@ -1,10 +1,10 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   def index
     @product_filter = ProductFilter.new(filter_params)
-  	@products = @product_filter.search
+  	@products = @product_filter.search.page params[:page]
   end
 
   def new
@@ -13,6 +13,7 @@ class ProductsController < ApplicationController
 
   def create
   	@product = Product.new(product_params)
+    
     if @product.save
       redirect_to @product, :success => 'Create product successfully'
     else
@@ -51,7 +52,8 @@ class ProductsController < ApplicationController
     def filter_params
       return if params[:product_filter].nil?
       data = params.require(:product_filter).permit(
-                                      :price, 
+                                      :min_price,
+                                      :max_price, 
                                       :sort,
                                       :order,
                                       manufacturer_ids: []

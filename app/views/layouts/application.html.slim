@@ -2,9 +2,9 @@ doctype html
 html
   head
     = render 'layouts/head'
-  body
+  body class=page_class
     = render 'layouts/header'
-
     main = yield
-    
     = render 'layouts/footer'
+
+    = javascript_initialization

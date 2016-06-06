@@ -5,26 +5,25 @@
       .col.s12.m3
         = render 'products/filter', product_filter: @product_filter
       .col.s12.m9
-        #products-header
-          .intro
-            h5.bold.uppercase MEN'S RUNNING SHOE GUIDE
-            p Find running shoes great for a range of running types and goals.
-        #products-counter-and-sorting
-          .row
-            .col.s6.counter
-                = @products.count
-                |  matching products
-            .col.s6.right-align.sorting
-              .row
-                .col.s6
-                  h5 Sort by:
-                .col.s6
-                  = select_tag :sort, options_for_select(sort_product_listing, root_path(params)), onchange: "window.location = this.value"
-        - if @products.present?
-          - @products.each_slice(3) do |products|
-            .row
-              - products.each do |product|
-                .col.s12.m4.l4
-                  = render product
-        - else
-          p.center-align There is no product results
+        .row
+          .col.s12
+            .products-header
+              .intro
+                h5.bold.uppercase MEN'S RUNNING SHOE GUIDE
+                p Find running shoes great for a range of running types and goals.
+        .row
+          .col.s6
+            p 
+              = @products.count
+              |  matching products
+          .col.s6
+            = render 'products/sorter'
+        .row
+          .col.s12
+            - if @products.present?
+              = render 'products/products', products: @products
+            - else
+              p.center-align There is no product results
+        .row
+          = paginate @products 
+              

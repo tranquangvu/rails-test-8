@@ -1,3 +1,5 @@
-$(document).ready(function() {
-	window.materializeForm.init();
-});
+window.RailsTest8 = {
+  init: function() {
+  	window.materializeForm.init();  	
+  }
+}

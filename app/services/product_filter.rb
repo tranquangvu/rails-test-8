@@ -2,7 +2,7 @@ class ProductFilter
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
-  attr_accessor :manufacturer_ids, :price, :sort, :order
+  attr_accessor :manufacturer_ids, :min_price, :max_price, :sort, :order
 
   def initialize(attributes)
     return if attributes.nil?
@@ -14,7 +14,7 @@ class ProductFilter
     @products = Product.all 
 
     @products = @products.by_manufacturers(manufacturer_ids) if manufacturer_ids.present?
-    @products = @products.by_price(price) if price.present?
+    @products = @products.by_price(min_price, max_price) if min_price.present? && max_price.present?
   
     @products = @products.order("#{sort} #{order}") if sort.present? && order.present?
     

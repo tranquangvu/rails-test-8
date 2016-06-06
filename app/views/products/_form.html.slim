@@ -4,10 +4,15 @@
 			= f.error_notification
 		.row
 			= f.input :image, wrapper_html: { class: 's12' }
+		.row
 			= f.input :name, wrapper_html: { class: 's12' }
+		.row
 			= f.input :description, wrapper_html: { class: 's12' }
+		.row
 			= f.input :price, placeholder: 'Price', wrapper_html: { class: 's12' }
+		.row
 			= f.association :manufacturer, include_blank: 'Choose a manufacturer', wrapper_html: { class: 's12' }
+		.row
 			= f.association :type, include_blank: 'Choose a type', wrapper_html: { class: 's12' }
 		= f.button :submit, class: 'btn-large'	
 			

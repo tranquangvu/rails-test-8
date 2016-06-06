@@ -1,0 +1,6 @@
+.products-products-container
+  - products.each_slice(3) do |products|
+    .row
+      - products.each do |product|
+        .col.s12.m4.l4
+          = render product

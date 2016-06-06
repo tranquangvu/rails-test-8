@@ -1,14 +1,13 @@
 .products-filter-container
   h5 Redefine by: 
-
-  = simple_form_for product_filter, url: products_path, method: :get do |f|
-  	= f.hidden_field :sort
-  	= f.hidden_field :order
-  	.row
-  		= f.input :manufacturer_ids, as: :check_boxes, collection: Manufacturer.all, wrapper_html: { class: 's12' }
-  	.row
-  		= f.input :price, as: :range, min: Product.minimum('price'), max: Product.maximum('price'), wrapper_html: { class: 's12' }
-  	= f.button :submit
-  
-
-  
+  = simple_form_for product_filter, url: products_path, defaults: { label: false }, method: :get do |f|
+    = f.hidden_field :sort
+    = f.hidden_field :order
+    .row
+      = f.input :manufacturer_ids, as: :check_boxes, collection: Manufacturer.all, wrapper_html: { class: 's12' }
+    .row
+      .col.s12.input-field 
+        #price-slider min="#{Product.minimum('price')}" max="#{Product.maximum('price')}"
+        = f.hidden_field :min_price
+        = f.hidden_field :max_price
+    = f.button :submit, 'Filter', class: 'dispay-block-100'

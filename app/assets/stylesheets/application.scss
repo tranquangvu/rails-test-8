@@ -1,4 +1,5 @@
 @import "materialize";
+@import "materialize/extras/nouislider";
 @import "font";
 @import "font-awesome";
 @import "theme";
@@ -6,5 +7,6 @@
 @import "products/index";
 @import "products/_product";
 @import "products/_filter";
+@import "products/_sorter";
 
 @import "shared/_services";

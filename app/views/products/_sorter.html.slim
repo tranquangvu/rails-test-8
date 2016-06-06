@@ -1,0 +1,6 @@
+.products-sorter-container
+  .row.right-align
+    .col.s6
+      p Sort by:
+    .col.s6
+      = select_tag :sort, options_for_select(sort_product_listing(params), root_path(params)), onchange: "window.location = this.value"

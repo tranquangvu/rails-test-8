@@ -17,21 +17,19 @@ class ProductsController < ApplicationController
     if @product.save
       redirect_to @product, :success => 'Create product successfully'
     else
-      render :new, :error => 'Errors when create product'
+      render :new
     end
   end
 
-  def show
-  end
+  def show; end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @product.update(product_params)
       redirect_to @product, :success => 'Update product successfully'
     else
-      render :edit, :error => 'Errors when update product'
+      render :edit
     end
   end
 
@@ -41,22 +39,27 @@ class ProductsController < ApplicationController
   end
 
   private
-  	def product_params
-  		params.require(:product).permit(:name, :description, :price, :manufacturer_id, :type_id, :image)
-  	end
+	def product_params
+		params.require(:product).permit(:name,
+                                    :description,
+                                    :price,
+                                    :manufacturer_id,
+                                    :type_id,
+                                    :image
+                                    )
+	end
 
-    def set_product
-      @product = Product.find(params[:id])
-    end
+  def set_product
+    @product = Product.find(params[:id])
+  end
 
-    def filter_params
-      return if params[:product_filter].nil?
-      data = params.require(:product_filter).permit(
-                                      :min_price,
-                                      :max_price, 
-                                      :sort,
-                                      :order,
-                                      manufacturer_ids: []
-                                      )
-    end
+  def filter_params
+    return if params[:product_filter].nil?
+    data = params.require(:product_filter).permit(:min_price,
+                                                  :max_price, 
+                                                  :sort,
+                                                  :order,
+                                                  manufacturer_ids: []
+                                                  )
+  end
 end

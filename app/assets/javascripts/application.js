@@ -3,6 +3,7 @@
 //= require materialize-sprockets
 //= require materialize/extras/nouislider
 //= require materialize-form
+//= require jquery.remotipart
 //= require global
 
 //= require products/index

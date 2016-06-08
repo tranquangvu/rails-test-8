@@ -1,21 +1,17 @@
 #product-show-container
-	h1.header.product-name
-		= @product.name
-	.product-image
-		= image_tag @product.image.url(:medium)
-	.product-description
-		| Description: 
-		= simple_format @product.description
-	.product-price
-		| Price: 
-		= number_to_currency(@product.price)
-	.product-brand
-		| Brand: 
-		= @product.manufacturer.name
-	.product-type
-		| Type: 
-		= @product.type.name
-	.action
-		= link_to 'Edit', edit_product_path(@product), class: 'waves-effect waves-light btn cyan'
-		= link_to 'Destroy', product_path(@product), method: :delete, data: { confirm: "Are you sure to delete this product?" }, class: 'waves-effect waves-light btn red'
-		
+  #product-detail
+    = render 'products/detail', product: @product
+  .fixed-action-btn style=("bottom: 45px; right: 24px;") 
+    a.btn-floating.btn-large.red
+      i.large.material-icons menu
+    ul
+      li
+        = link_to product_path(@product), method: :delete, data: { confirm: "Are you sure to delete this product?" }, class: 'btn-floating deep-purple' do
+          i.material-icons delete
+      li
+        = link_to '#edit-product-modal', class: 'btn-floating cyan modal-trigger' do
+          i.material-icons mode_edit
+  #edit-product-modal.modal
+    .modal-content.center-align
+      h4 Update product
+      = render 'products/form'

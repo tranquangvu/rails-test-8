@@ -2,9 +2,10 @@ doctype html
 html
   head
     = render 'layouts/head'
-  body class=page_class
+  body
     = render 'layouts/header'
+    - flash.each do |name, msg|
+    	= content_tag :div, msg, class: 'alert notice'
     main = yield
     = render 'layouts/footer'
-
     = javascript_initialization

@@ -1,0 +1,6 @@
+<% if @success %>
+	$('#edit-product-modal').closeModal();
+	$('#product-detail').html("<%= j render 'products/detail', product: @product %>");
+<% end %>
+$('#edit-product-modal .modal-content').find('form').remove();
+$('#edit-product-modal .modal-content').append("<%= j render 'products/form' %>");

@@ -13,13 +13,10 @@ class ProductsController < ApplicationController
     end
   end
 
-  def new
-    @product = Product.new
-  end
-
   def create
     @product = Product.new(product_params)
     @success = @product.save
+    
     if @success
       @product_filter = ProductFilter.new(filter_params)
       @products = @product_filter.search.paginate(:page => params[:page], :per_page => 3)

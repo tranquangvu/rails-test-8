@@ -10,4 +10,4 @@
         #price-slider min="#{Product.minimum('price')}" max="#{Product.maximum('price')}"
         = f.hidden_field :min_price, value: params[:min_price] || Product.minimum('price')
         = f.hidden_field :max_price, value: params[:max_price] || Product.maximum('price')
-    = f.button :submit, 'Filter', class: 'dispay-block-100'
+    = f.button :submit, 'Filter', class: 'dispay-block-100 btn-large'

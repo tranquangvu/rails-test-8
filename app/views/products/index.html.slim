@@ -24,10 +24,11 @@
               = render 'products/products', products: @products
             - else
               p.center-align There is no product results
-    .fixed-action-btn
-      = link_to '#new-product-modal', class: 'btn-floating btn-large red modal-trigger' do
-        i.material-icons add
-    #new-product-modal.modal
-      .modal-content.center-align
-        h4 New product
-        = render 'products/form'
+    - if user_signed_in?
+      .fixed-action-btn
+        = link_to '#new-product-modal', class: 'btn-floating btn-large red modal-trigger' do
+          i.material-icons add
+      #new-product-modal.modal
+        .modal-content.center-align
+          h4 New product
+          = render 'products/form'

@@ -3,34 +3,33 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   def index
+    @product = Product.new
     @product_filter = ProductFilter.new(filter_params)
-  	@products = @product_filter.search.page params[:page]
+    @products = @product_filter.search.paginate(:page => params[:page], :per_page => 3)
+    
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def new
-  	@product = Product.new
+    @product = Product.new
   end
 
   def create
-  	@product = Product.new(product_params)
-    
-    if @product.save
-      redirect_to @product, :success => 'Create product successfully'
-    else
-      render :new
-    end
+    @product = Product.new(product_params)
+    @success = @product.save
+    if @success
+      @product_filter = ProductFilter.new(filter_params)
+      @products = @product_filter.search.paginate(:page => params[:page], :per_page => 3)
+    end 
   end
 
   def show; end
 
-  def edit; end
-
   def update
-    if @product.update(product_params)
-      redirect_to @product, :success => 'Update product successfully'
-    else
-      render :edit
-    end
+    @success = @product.update(product_params)
   end
 
   def destroy
@@ -39,15 +38,15 @@ class ProductsController < ApplicationController
   end
 
   private
-	def product_params
-		params.require(:product).permit(:name,
+  def product_params
+    params.require(:product).permit(:name,
                                     :description,
                                     :price,
                                     :manufacturer_id,
                                     :type_id,
                                     :image
                                     )
-	end
+  end
 
   def set_product
     @product = Product.find(params[:id])

@@ -1,0 +1,17 @@
+.container
+  h1.header.product-name
+    = product.name
+  .product-image
+    = image_tag product.image.url(:medium)
+  .product-description
+    | Description: 
+    = simple_format product.description
+  .product-price
+    | Price: 
+    = number_to_currency(product.price)
+  .product-brand
+    | Brand: 
+    = product.manufacturer.name
+  .product-type
+    | Type: 
+    = product.type.name

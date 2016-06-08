@@ -4,3 +4,6 @@
       - products.each do |product|
         .col.s12.m4.l4
           = render product
+  .row
+    = js_will_paginate products 
+    

@@ -1,7 +1,5 @@
 .products-form-container
-	= simple_form_for @product, defaults: { label: false } do |f|
-		.form-error
-			= f.error_notification
+	= simple_form_for @product, defaults: { label: false }, remote: true, authenticity_token: true do |f|
 		.row
 			= f.input :image, wrapper_html: { class: 's12' }
 		.row
@@ -14,5 +12,6 @@
 			= f.association :manufacturer, include_blank: 'Choose a manufacturer', wrapper_html: { class: 's12' }
 		.row
 			= f.association :type, include_blank: 'Choose a type', wrapper_html: { class: 's12' }
-		= f.button :submit, class: 'btn-large'	
+		.center-align
+			= f.button :submit, class: 'btn-large'	
 			

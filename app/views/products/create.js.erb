@@ -1,0 +1,7 @@
+<% if @success %>
+  $('#new-product-modal').closeModal();
+  $('#products').html("<%= j render 'products/products', products: @products %>");
+  Materialize.toast('Create product successfully.', 6000);
+<% end %>
+$('#new-product-modal .modal-content').find('form').remove();
+$('#new-product-modal').find('.modal-content').append("<%= j render('products/form') %>");  

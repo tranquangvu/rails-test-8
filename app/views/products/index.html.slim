@@ -6,24 +6,28 @@
         = render 'products/filter', product_filter: @product_filter
       .col.s12.m9
         .row
-          .col.s12
+          #header.col.s12
             .products-header
               .intro
                 h5.bold.uppercase MEN'S RUNNING SHOE GUIDE
                 p Find running shoes great for a range of running types and goals.
         .row
-          .col.s6
+          #matching-number.col.s6
             p 
               = @products.count
               |  matching products
-          .col.s6
+          #sorter.col.s6
             = render 'products/sorter'
         .row
-          .col.s12
+          #products.col.s12
             - if @products.present?
               = render 'products/products', products: @products
             - else
               p.center-align There is no product results
-        .row
-          = paginate @products 
-              
+    .fixed-action-btn
+      = link_to '#new-product-modal', class: 'btn-floating btn-large red modal-trigger' do
+        i.material-icons add
+    #new-product-modal.modal
+      .modal-content.center-align
+        h4 New product
+        = render 'products/form'
